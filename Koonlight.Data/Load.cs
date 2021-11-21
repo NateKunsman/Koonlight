@@ -27,12 +27,12 @@ namespace Koonlight.Models
         //Create later as an enum //https://www.bts.gov/topics/freight-transportation/freight-shipments-commodity
         public string Commodity { get; set; }
         public decimal RatePerMile { get; set; }
-        public DateTime DeliverByDate { get; set; }
+        public DateTimeOffset? DeliverByDate { get; set; }
         public bool LoadCovered { get; set; }
         public bool PickedUp { get; set; }
         public bool LoadDelivered { get; set; }
-        public DateTime TimePickedUp { get; set; }
-        public DateTime TimeDelived { get; set; }
+        public DateTimeOffset? TimePickedUp { get; set; }
+        public DateTimeOffset? TimeDelived { get; set; }
         
 
     }

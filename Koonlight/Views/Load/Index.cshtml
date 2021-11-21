@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Koonlight.Models.LoadList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoadId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DropOffLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoadId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayOut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickUpLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DropOffLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Distance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

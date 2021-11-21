@@ -8,15 +8,15 @@ using System.Web.Mvc;
 
 namespace Koonlight.Controllers
 {
+    [Authorize]
     public class LoadController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
         // GET: Load
         public ActionResult Index()
         {
-            List<Load> loadList = _db.Loads.ToList();
-            List<Load> orderedList = loadList.OrderBy(load => load.LoadId).ToList();
-            return View(orderedList);
+            var model = new LoadList[0];
+            return View(model);
         }
         //GET:Load
         public ActionResult Create()

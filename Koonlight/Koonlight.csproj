@@ -236,6 +236,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Load\Create.cshtml" />
+    <Content Include="Views\Load\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -257,6 +258,10 @@
     <ProjectReference Include="..\Koonlight.Data\Koonlight.Data.csproj">
       <Project>{B3D485C6-9616-42D7-8C81-0FD2A4BF70F3}</Project>
       <Name>Koonlight.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Koonlight.Models\Koonlight.Models.csproj">
+      <Project>{B5AD6B49-090A-4D01-8EF4-CBFA74731D12}</Project>
+      <Name>Koonlight.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
