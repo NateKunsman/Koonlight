@@ -4,44 +4,35 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Koonlight.Models
 {
-    public class Load
+    public class LoadCreate
     {
         [Key]
+        [Required]
         public int LoadId { get; set; }
-        [ForeignKey(nameof(Driver))]
-        public string DriverID { get; set; }
-        public virtual ApplicationUser Driver { get; set; }
         public string Broker { get; set; }
-        [MaxLength(4, ErrorMessage ="There are too many characters in this feild")]
+        [MaxLength(4, ErrorMessage = "There are too many characters in this feild")]
+        [Required]
         public string SCAC { get; set; }
+        [Required]
         public decimal PayOut { get; set; }
+        [Required]
         public string PickUpLocation { get; set; }
+        [Required]
         public string DropOffLocation { get; set; }
         public decimal Distance { get; set; }
+        [Required]
         public decimal Weight { get; set; }
         public EndorsementNeededEnum SpecialLicenseNeeded { get; set; }
         //Create later as an enum //https://www.bts.gov/topics/freight-transportation/freight-shipments-commodity
         public string Commodity { get; set; }
         public decimal RatePerMile { get; set; }
+        [Required]
         public DateTimeOffset? DeliverByDate { get; set; }
-        public bool LoadCovered { get; set; }
-        public bool PickedUp { get; set; }
-        public bool LoadDelivered { get; set; }
-        public DateTimeOffset? TimePickedUp { get; set; }
-        public DateTimeOffset? TimeDelived { get; set; }
-        
-
-    }
-    public enum EndorsementNeededEnum
-    {
-        Hazmat = 1,
-        Tanker,
-        Multiple_Trailers,
-        Hazmat_Tank
 
     }
 }

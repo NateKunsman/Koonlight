@@ -23,5 +23,15 @@ namespace Koonlight.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(LoadCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(model);
+        }
     }
 }

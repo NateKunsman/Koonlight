@@ -11,7 +11,7 @@ namespace Koonlight.Models
     {
         [Key]
         public int ShipperID { get; set; }
-        [ForeignKey(nameof(Load))]
+        [ForeignKey(nameof(LoadID))]
         public int LoadID { get; set; }
         [Required]
         public string CompanyName { get; set; }
