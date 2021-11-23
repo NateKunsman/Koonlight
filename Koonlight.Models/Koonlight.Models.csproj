@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoadCreate.cs" />
+    <Compile Include="LoadEdit.cs" />
     <Compile Include="LoadList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

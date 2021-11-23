@@ -12,18 +12,18 @@ namespace Koonlight.MVC.Data
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required]
+        //[Required]
         public string FirstName { get; set; }
-        [Required]
+        //[Required]
         public string LastName { get; set; }
         public string FullName { get; set; }
-        [Required]
+        //[Required]
         public int DLN { get; set; }
-        [Required]
+        //[Required]
         public string Company { get; set; }
-        [Required]
+        //[Required]
         public int PickUpNum { get; set; }
-        [Required]
+        //[Required]
         public int Phone { get; set; }
         public string SCAC { get; set; }
         public bool Currently { get; set; }

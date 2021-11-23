@@ -1,5 +1,7 @@
 ﻿using Koonlight.Models;
 using Koonlight.MVC.Data;
+using Koonlight.Service;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,13 @@ namespace Koonlight.Controllers
     public class LoadController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
+        private Guid _userId;
         // GET: Load
         public ActionResult Index()
         {
-            var model = new LoadList[0];
+            var service = CreateLoadService();
+            var model = service.GetLoads();
+
             return View(model);
         }
         //GET:Load
@@ -27,11 +32,22 @@ namespace Koonlight.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(LoadCreate model)
         {
-            if (ModelState.IsValid)
-            {
+            if (!ModelState.IsValid) return View(model);
+      
+            var service = CreateLoadService();
 
-            }
+            if (service.CreateLoad(model))
+            {
+                return RedirectToAction("Index");
+            };
             return View(model);
+        }
+
+        private LoadService CreateLoadService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new LoadService(_userId);
+            return service;
         }
     }
 }

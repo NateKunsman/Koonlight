@@ -263,6 +263,10 @@
       <Project>{B5AD6B49-090A-4D01-8EF4-CBFA74731D12}</Project>
       <Name>Koonlight.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Koonlight.Service\Koonlight.Service.csproj">
+      <Project>{BDD2C109-8F64-4E0C-BFEF-769B6F5A23F8}</Project>
+      <Name>Koonlight.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

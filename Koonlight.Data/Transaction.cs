@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Koonlight.MVC.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,10 +16,13 @@ namespace Koonlight.Models
         public int Payout { get; set; }
         [ForeignKey(nameof(Shipper))]
         public int ShipperID { get; set; }
+        public virtual Shipper Shipper { get; set; }
         [ForeignKey(nameof(Load))]
         public int LoadID { get; set; }
-        [ForeignKey(nameof(DriverID))]
-        public int DriverID { get; set; }
-       //POD (stretch goal)
+        public virtual Load Load { get; set; }
+        [ForeignKey(nameof(Driver))]
+        public string DriverID { get; set; }
+        public virtual ApplicationUser Driver { get; set; }
+        //POD (stretch goal)
     }
 }
