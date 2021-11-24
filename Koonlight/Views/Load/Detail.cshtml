@@ -1,0 +1,154 @@
+﻿@model Koonlight.Models.LoadDetail
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>LoadDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LoadId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoadId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Broker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Broker)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SCAC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SCAC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PickUpLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PickUpLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DropOffLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DropOffLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commodity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commodity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatePerMile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatePerMile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliverByDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliverByDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoadCovered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoadCovered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PickedUp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PickedUp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoadDelivered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoadDelivered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimePickedUp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimePickedUp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeDelived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeDelived)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.LoadId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -15,7 +15,7 @@ namespace Koonlight.Controllers
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
         private Guid _userId;
-        // GET: Load
+        //POST: Load
         public ActionResult Index()
         {
             var service = CreateLoadService();
@@ -23,7 +23,7 @@ namespace Koonlight.Controllers
 
             return View(model);
         }
-        //GET:Load
+        //POST:Load
         public ActionResult Create()
         {
             return View();
@@ -42,12 +42,87 @@ namespace Koonlight.Controllers
             };
             return View(model);
         }
+        //GET: Load Detail
+        public ActionResult Detail(LoadDetail model)
+        {
+            var svc = CreateLoadService();
+            var load = svc.GetLoadById(model.LoadId); 
 
+            return View(load);
+        }
+
+        //GET: List Load
+        //PUT: Edit Load
+        public ActionResult Edit(int id)
+        {
+            var service = CreateLoadService();
+            var detail = service.GetLoadById(id);
+            var model =
+                new LoadEdit
+                {
+                    SCAC = detail.SCAC,
+                    Broker = detail.Broker,
+                    PayOut = detail.PayOut,
+                    PickUpLocation = detail.PickUpLocation,
+                    DropOffLocation = detail.DropOffLocation,
+                    Distance = detail.Distance,
+                    Weight = detail.Weight,
+                    Commodity = detail.Commodity,
+                    RatePerMile = detail.RatePerMile,
+                    DeliverByDate = detail.DeliverByDate,
+                    LoadCovered = detail.LoadCovered,
+                };
+            return View(model);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, LoadEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            if(model.LoadId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+            var service = CreateLoadService();
+            if (service.UpdateLoad(model))
+            {
+                TempData["SaveResult"] = "Your note was updated.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Your note could not be updated.");
+            return View();
+        }
+        //PUT: Edit Load
+        //Delete Load
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateLoadService();
+            var load = svc.GetLoadById(id); 
+
+            return View(load);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteLoad(int id)
+        {
+            var service = CreateLoadService();
+            service.DeleteLoad(id);
+            TempData["SaveResult"] = "Your note was deleted";
+            return RedirectToAction("Index");
+        }
+
+        //Helper method
         private LoadService CreateLoadService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new LoadService(_userId);
             return service;
         }
+        
     }
 }

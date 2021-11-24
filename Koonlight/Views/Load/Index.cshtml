@@ -59,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new {  id=item.LoadId  }) |
+            @Html.ActionLink("Details", "Details", new { id = item.LoadId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.LoadId })
         </td>
     </tr>
 }

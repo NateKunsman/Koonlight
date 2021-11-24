@@ -13,10 +13,10 @@ namespace Koonlight.Models
         [Key]
         public int LoadId { get; set; }
         [ForeignKey(nameof(Driver))]
-        public string DriverID { get; set; }
+        public Guid DriverID { get; set; }
         public virtual ApplicationUser Driver { get; set; }
         public string Broker { get; set; }
-        [MaxLength(4, ErrorMessage ="There are too many characters in this feild")]
+        [MaxLength(4, ErrorMessage ="There are too many characters in this field")]
         public string SCAC { get; set; }
         public decimal PayOut { get; set; }
         public string PickUpLocation { get; set; }

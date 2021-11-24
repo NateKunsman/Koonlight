@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Koonlight.Service
 {
-    public class LoadService
-    {
+        public class LoadService
+        {
+        private readonly ApplicationDbContext ctx = new ApplicationDbContext();
         private readonly Guid _userId;
         public LoadService(Guid userId)
         {
@@ -28,7 +29,6 @@ namespace Koonlight.Service
                     Weight = model.Weight,
                     DeliverByDate = model.DeliverByDate
                 };
-            using (var ctx = new ApplicationDbContext())
             {
                 ctx.Loads.Add(entity);
                 return ctx.SaveChanges() == 1;
@@ -36,12 +36,11 @@ namespace Koonlight.Service
         }
         public IEnumerable<LoadList> GetLoads()
         {
-            using (var ctx = new ApplicationDbContext())
             {
                 var quary =
                     ctx
                         .Loads
-                        //.Where(e => e.Driver.Id == DriverId)
+                        //.Where(e => e.Driver.Id == DriverId) //Figure out if actually you need this and if so fix this (so far I don't think I need it)
                         .Select(
                              e =>
                                 new LoadList
@@ -57,5 +56,68 @@ namespace Koonlight.Service
                 return quary.ToArray();
             }
         }
+        public LoadDetail GetLoadById(int id)
+        {
+            {
+                var entity =
+                    ctx
+                        .Loads
+                        .Single(e => e.LoadId == id && e.DriverID == _userId); 
+                return
+                  new LoadDetail
+                  {
+                      LoadId = entity.LoadId,
+                      SCAC = entity.SCAC,
+                      Broker = entity.Broker,
+                      PayOut = entity.PayOut,
+                      PickUpLocation = entity.PickUpLocation,
+                      DropOffLocation = entity.DropOffLocation,
+                      Distance = entity.Distance,
+                      Weight = entity.Weight,
+                      Commodity = entity.Commodity,
+                      RatePerMile = entity.RatePerMile,
+                      DeliverByDate = entity.DeliverByDate,
+                      LoadCovered = entity.LoadCovered,
+                      PickedUp = entity.PickedUp,
+                      LoadDelivered = entity.LoadDelivered,
+                      TimePickedUp = entity.TimePickedUp,
+                      TimeDelived = entity.TimeDelived,
+                  };
+            }
+        }
+        public bool UpdateLoad(LoadEdit model)
+        {
+            {
+                var entity =
+                    ctx
+                        .Loads
+                        .Single(e => e.LoadId == model.LoadId && e.DriverID == _userId);
+                entity.LoadId = model.LoadId;
+                entity.SCAC = model.SCAC;
+                entity.Broker = model.Broker;
+                entity.PayOut = model.PayOut;
+                entity.PickUpLocation = model.PickUpLocation;
+                entity.DropOffLocation = model.DropOffLocation;
+                entity.Distance = model.Distance;
+                entity.Weight = model.Weight;
+                entity.Commodity = model.Commodity;
+                entity.RatePerMile = model.RatePerMile;
+                entity.DeliverByDate = model.DeliverByDate;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool DeleteLoad(int Id)
+        {
+            {
+                var entity =
+                    ctx
+                        .Loads
+                        .Single(e => e.LoadId == Id && e.DriverID == _userId);
+                ctx.Loads.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
     }
 }
