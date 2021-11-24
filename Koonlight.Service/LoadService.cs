@@ -62,7 +62,7 @@ namespace Koonlight.Service
                 var entity =
                     ctx
                         .Loads
-                        .Single(e => e.LoadId == id && e.DriverID == _userId); 
+                        .Single(e => e.LoadId == id /*&& e.DriverID == _userId.ToString()*/); 
                 return
                   new LoadDetail
                   {
@@ -91,7 +91,7 @@ namespace Koonlight.Service
                 var entity =
                     ctx
                         .Loads
-                        .Single(e => e.LoadId == model.LoadId && e.DriverID == _userId);
+                        .Single(e => e.LoadId == model.LoadId /*&& e.DriverID == _userId.ToString()*/);
                 entity.LoadId = model.LoadId;
                 entity.SCAC = model.SCAC;
                 entity.Broker = model.Broker;
@@ -113,7 +113,7 @@ namespace Koonlight.Service
                 var entity =
                     ctx
                         .Loads
-                        .Single(e => e.LoadId == Id && e.DriverID == _userId);
+                        .Single(e => e.LoadId == Id /*&& e.DriverID == _userId.ToString()*/);
                 ctx.Loads.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Koonlight.Models
 {
-    class ShipperList
+    public class ShipperList
     {
         [Key]
         public int ShipperID { get; set; }

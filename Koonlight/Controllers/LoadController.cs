@@ -100,9 +100,9 @@ namespace Koonlight.Controllers
         public ActionResult Delete(int id)
         {
             var svc = CreateLoadService();
-            var load = svc.GetLoadById(id); 
+            var model = svc.GetLoadById(id); 
 
-            return View(load);
+            return View(model);
         }
 
         [HttpPost]

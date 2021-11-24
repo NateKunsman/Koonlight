@@ -13,7 +13,7 @@ namespace Koonlight.Models
         [Key]
         public int LoadId { get; set; }
         [ForeignKey(nameof(Driver))]
-        public Guid DriverID { get; set; }
+        public string DriverID { get; set; }
         public virtual ApplicationUser Driver { get; set; }
         public string Broker { get; set; }
         [MaxLength(4, ErrorMessage ="There are too many characters in this field")]
