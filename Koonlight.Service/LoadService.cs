@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Koonlight.Service
 {
-        public class LoadService
-        {
+    public class LoadService
+    {
         private readonly ApplicationDbContext ctx = new ApplicationDbContext();
         private readonly Guid _userId;
         public LoadService(Guid userId)
@@ -21,7 +21,6 @@ namespace Koonlight.Service
             var entity =
                 new Load()
                 {
-                    //OwnerId = Driver,
                     SCAC = model.SCAC,
                     PayOut = model.PayOut,
                     PickUpLocation = model.PickUpLocation,
@@ -58,32 +57,32 @@ namespace Koonlight.Service
         }
         public LoadDetail GetLoadById(int id)
         {
-            {
-                var entity =
-                    ctx
-                        .Loads
-                        .Single(e => e.LoadId == id /*&& e.DriverID == _userId.ToString()*/); 
-                return
-                  new LoadDetail
-                  {
-                      LoadId = entity.LoadId,
-                      SCAC = entity.SCAC,
-                      Broker = entity.Broker,
-                      PayOut = entity.PayOut,
-                      PickUpLocation = entity.PickUpLocation,
-                      DropOffLocation = entity.DropOffLocation,
-                      Distance = entity.Distance,
-                      Weight = entity.Weight,
-                      Commodity = entity.Commodity,
-                      RatePerMile = entity.RatePerMile,
-                      DeliverByDate = entity.DeliverByDate,
-                      LoadCovered = entity.LoadCovered,
-                      PickedUp = entity.PickedUp,
-                      LoadDelivered = entity.LoadDelivered,
-                      TimePickedUp = entity.TimePickedUp,
-                      TimeDelived = entity.TimeDelived,
-                  };
-            }
+
+            var entity =
+                ctx
+                    .Loads
+                    .Single(e => e.LoadId == id /*&& e.DriverID == _userId.ToString()*/);
+            return
+              new LoadDetail
+              {
+                  LoadId = entity.LoadId,
+                  SCAC = entity.SCAC,
+                  Broker = entity.Broker,
+                  PayOut = entity.PayOut,
+                  PickUpLocation = entity.PickUpLocation,
+                  DropOffLocation = entity.DropOffLocation,
+                  Distance = entity.Distance,
+                  Weight = entity.Weight,
+                  Commodity = entity.Commodity,
+                  RatePerMile = entity.RatePerMile,
+                  DeliverByDate = entity.DeliverByDate,
+                  LoadCovered = entity.LoadCovered,
+                  PickedUp = entity.PickedUp,
+                  LoadDelivered = entity.LoadDelivered,
+                  TimePickedUp = entity.TimePickedUp,
+                  TimeDelived = entity.TimeDelived,
+              };
+
         }
         public bool UpdateLoad(LoadEdit model)
         {

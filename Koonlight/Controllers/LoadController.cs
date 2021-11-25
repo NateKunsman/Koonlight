@@ -43,10 +43,10 @@ namespace Koonlight.Controllers
             return View(model);
         }
         //GET: Load Detail
-        public ActionResult Detail(LoadDetail model)
+        public ActionResult Detail(int id)
         {
             var svc = CreateLoadService();
-            var load = svc.GetLoadById(model.LoadId); 
+            var load = svc.GetLoadById(id); 
 
             return View(load);
         }
@@ -66,6 +66,7 @@ namespace Koonlight.Controllers
                     PickUpLocation = detail.PickUpLocation,
                     DropOffLocation = detail.DropOffLocation,
                     Distance = detail.Distance,
+                    SpecialLicenseNeeded = detail.SpecialLicenseNeeded,
                     Weight = detail.Weight,
                     Commodity = detail.Commodity,
                     RatePerMile = detail.RatePerMile,
@@ -88,10 +89,10 @@ namespace Koonlight.Controllers
             var service = CreateLoadService();
             if (service.UpdateLoad(model))
             {
-                TempData["SaveResult"] = "Your note was updated.";
+                TempData["SaveResult"] = "Your load was updated.";
                 return RedirectToAction("Index");
             }
-            ModelState.AddModelError("", "Your note could not be updated.");
+            ModelState.AddModelError("", "Your load could not be updated.");
             return View();
         }
         //PUT: Edit Load
@@ -112,7 +113,7 @@ namespace Koonlight.Controllers
         {
             var service = CreateLoadService();
             service.DeleteLoad(id);
-            TempData["SaveResult"] = "Your note was deleted";
+            TempData["SaveResult"] = "Your load was deleted";
             return RedirectToAction("Index");
         }
 

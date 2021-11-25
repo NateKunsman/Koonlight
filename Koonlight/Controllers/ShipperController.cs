@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Koonlight.Models;
+using Koonlight.Service;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +14,9 @@ namespace Koonlight.Controllers
         // GET: Shipper
         public ActionResult Index()
         {
-            return View();
+            var service = CreateShipperService();
+            var model = service.GetShippers();
+            return View(model);
         }
 
         // GET: Shipper/Details/5
@@ -28,23 +33,26 @@ namespace Koonlight.Controllers
 
         // POST: Shipper/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateShipper(ShipperCreate model)
         {
-            try
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreateShipperService();
+
+            if (service.CreateShipper(model))
             {
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Shipper/Edit/5
         public ActionResult Edit(int id)
         {
+
             return View();
         }
 
@@ -52,16 +60,16 @@ namespace Koonlight.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var service = CreateShipperService();
+            var detail = service.GetShipperById(id);
+            var model =
+                new ShipperEdit
+                {
+                    CompanyName = detail.CompanyName,
+                    Address = detail.Address,
+                };
+            return View();
+            
         }
 
         // GET: Shipper/Delete/5
@@ -72,18 +80,22 @@ namespace Koonlight.Controllers
 
         // POST: Shipper/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteShipper(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var service = CreateShipperService();
+            service.DeleteShipper(id);
+            TempData["SaveResult"] = "Shipper was deleted";
+            return RedirectToAction("Index");
+        }
+        
+        //Helper method
+        private ShipperService CreateShipperService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ShipperService(userId);
+            return service;
         }
     }
 }

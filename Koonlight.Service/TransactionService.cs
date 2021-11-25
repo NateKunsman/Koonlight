@@ -38,7 +38,6 @@ namespace Koonlight.Service
                 var quary =
                     ctx
                         .Transactions
-                        //.Where(e => e.Driver.Id == DriverId) //Figure out if actually you need this and if so fix this (so far I don't think I need it)
                         .Select(
                              e =>
                                 new TransactionList
@@ -59,7 +58,7 @@ namespace Koonlight.Service
                 var entity =
                     ctx
                         .Transactions
-                        .Single(e => e.TransactionID == id /*&& e.DriverID == _userId.ToString()*/);
+                        .Single(e => e.TransactionID == id );
                 return
                   new TransactionDetail
                   {
@@ -94,7 +93,7 @@ namespace Koonlight.Service
                 var entity =
                     ctx
                         .Transactions
-                        .Single(e => e.TransactionID == Id /*&& e.DriverID == _userId.ToString()*/);
+                        .Single(e => e.TransactionID == Id );
                 ctx.Transactions.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }
