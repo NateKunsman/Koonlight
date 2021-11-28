@@ -19,10 +19,12 @@ namespace Koonlight.Controllers
             return View(model);
         }
 
-        // GET: Shipper/Details/5
+        // GET: Shipper/Details
         public ActionResult Details(int id)
         {
-            return View();
+            var svc = CreateShipperService();
+            var shipper = svc.GetShipperById(id);
+            return View(shipper);
         }
 
         // GET: Shipper/Create
@@ -46,19 +48,13 @@ namespace Koonlight.Controllers
 
                 return RedirectToAction("Index");
             }
+            ModelState.AddModelError("", "Shipper not created");
+
             return View();
         }
 
-        // GET: Shipper/Edit/5
+        // GET: Shipper/Edit
         public ActionResult Edit(int id)
-        {
-
-            return View();
-        }
-
-        // POST: Shipper/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
         {
             var service = CreateShipperService();
             var detail = service.GetShipperById(id);
@@ -68,17 +64,40 @@ namespace Koonlight.Controllers
                     CompanyName = detail.CompanyName,
                     Address = detail.Address,
                 };
-            return View();
-            
+            return View(model);
         }
 
-        // GET: Shipper/Delete/5
+        // POST: Shipper/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, ShipperEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            if (model.ShipperID != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+            var service = CreateShipperService();
+            if (service.UpdateShipper(model))
+            {
+                TempData["SaveResult"] = "Shipper detail was updated.";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Shipper could not be updated.");
+            return View();
+        }
+
+        // GET: Shipper/Delete
         public ActionResult Delete(int id)
         {
-            return View();
+            var svc = CreateShipperService();
+            var model = svc.GetShipperById(id);
+
+            return View(model);
         }
 
-        // POST: Shipper/Delete/5
+        // POST: Shipper/Delete
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

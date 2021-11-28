@@ -242,11 +242,17 @@
     <Content Include="Views\Load\Detail.cshtml" />
     <Content Include="Views\Load\Edit.cshtml" />
     <Content Include="Views\Load\Delete.cshtml" />
+    <Content Include="Views\Shipper\Index.cshtml" />
+    <Content Include="Views\Shipper\Create.cshtml" />
+    <Content Include="Views\Shipper\Edit.cshtml" />
+    <Content Include="Views\Shipper\Details.cshtml" />
+    <Content Include="Views\Shipper\Delete.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\Create.cshtml" />
+    <Content Include="Views\Transaction\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shipper\" />
-    <Folder Include="Views\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

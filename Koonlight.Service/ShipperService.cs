@@ -22,6 +22,7 @@ namespace Koonlight.Service
                 new Shipper()
                 {
                     ShipperID = model.ShipperID,
+                    LoadID = model.LoadID,
                     CompanyName = model.CompanyName,
                     Address = model.Address,
                     
@@ -42,6 +43,7 @@ namespace Koonlight.Service
                                 new ShipperList
                                 {
                                     ShipperID = e.ShipperID,
+                                    LoadID = e.LoadID,
                                     CompanyName = e.CompanyName,
                                     Address = e.Address,
                                 }

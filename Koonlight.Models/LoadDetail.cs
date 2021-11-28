@@ -11,7 +11,7 @@ namespace Koonlight.Models
 {
     public class LoadDetail
     {
-        public int LoadId { get; set; }
+        public int LoadID { get; set; }
         [ForeignKey(nameof(Driver))]
         public string DriverID { get; set; }
         public virtual ApplicationUser Driver { get; set; }

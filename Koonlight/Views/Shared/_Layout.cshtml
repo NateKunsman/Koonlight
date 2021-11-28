@@ -25,6 +25,9 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Loads", "Index", "Load")</li>
+                        <li>@Html.ActionLink("Shippers", "Index", "Shipper")</li>
+                        <li>@Html.ActionLink("Transactions", "Index", "Transaction")</li>
+
                     }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

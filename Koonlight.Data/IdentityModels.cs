@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Koonlight.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace Koonlight.MVC.Data
 {
@@ -22,13 +25,8 @@ namespace Koonlight.MVC.Data
         //[Required]
         public string Company { get; set; }
         //[Required]
-        public int PickUpNum { get; set; }
-        //[Required]
         public int Phone { get; set; }
-        public string SCAC { get; set; }
-        public bool Currently { get; set; }
         public EndorsementEnum SpecialLicense { get; set; }
-        public bool IsInsured { get; set; }
         //Current Location (stretch goal)
         //QR Code (stretch goal)
         //CDL Restrictions (stretch goal)
@@ -62,5 +60,32 @@ namespace Koonlight.MVC.Data
         public DbSet<Load> Loads { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Conventions
+                .Remove<PluralizingTableNameConvention>();
+
+            modelBuilder
+                .Configurations
+                .Add(new IdentityUserLoginConfiguration())
+                .Add(new IdentityUserRoleConfiguration());
+        }
+    }
+    public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
+    {
+        public IdentityUserLoginConfiguration()
+        {
+            HasKey(iul => iul.UserId);
+        }
+    }
+    public class IdentityUserRoleConfiguration : EntityTypeConfiguration<IdentityUserRole>
+    {
+        public IdentityUserRoleConfiguration()
+        {
+            HasKey(iur => iur.UserId);
+        }
     }
 }

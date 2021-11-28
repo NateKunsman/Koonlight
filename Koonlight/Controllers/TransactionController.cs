@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Koonlight.Models;
+using Koonlight.Service;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,13 +14,17 @@ namespace Koonlight.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-            return View();
+            var service = CreateTransactionService();
+            var model = service.GetTransactions();
+            return View(model);
         }
 
-        // GET: Transaction/Details/5
+        // GET: Transaction/Details
         public ActionResult Details(int id)
         {
-            return View();
+            var svc = CreateTransactionService();
+            var transaction = svc.GetTransactionById(id);
+            return View(transaction);
         }
 
         // GET: Transaction/Create
@@ -28,62 +35,84 @@ namespace Koonlight.Controllers
 
         // POST: Transaction/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTransaction(TransactionCreate model)
         {
-            try
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreateTransactionService();
+
+            if (service.CreateTransaction(model))
             {
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Transaction/Edit/5
-        public ActionResult Edit(int id)
-        {
             return View();
         }
 
-        // POST: Transaction/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        // GET: Shipper/Edit            ------Not sure I want there to be an option to edit a Transaction just yet.
+        //public ActionResult Edit(int id)
+        //{
+        //    var service = CreateTransactionService();
+        //    var detail = service.GetTransactionById(id);
+        //    var model =
+        //        new TransactionEdit
+        //        {
+        //            CompanyName = detail.CompanyName,
+        //            Address = detail.Address,
+        //        };
+        //    return View(model);
+        //}
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: Transaction/Edit/
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, TransactionEdit model)
+        //{
+        //    if (!ModelState.IsValid) return View(model);
+        //    if (model.ShipperID != id)
+        //    {
+        //        ModelState.AddModelError("", "Id Mismatch");
+        //        return View(model);
+        //    }
+        //    var service = CreateTransactionService();
+        //    if (service.UpdateTransaction(model))
+        //    {
+        //        TempData["SaveResult"] = "Transaction detail was updated.";
+        //        return RedirectToAction("Index");
+        //    }
+        //    ModelState.AddModelError("", "Transaction could not be updated.");
+        //    return View();
+        //}
 
-        // GET: Transaction/Delete/5
+        // GET: Transaction/Delete
         public ActionResult Delete(int id)
         {
-            return View();
+            var svc = CreateTransactionService();
+            var model = svc.GetTransactionById(id);
+
+            return View(model);
         }
 
-        // POST: Transaction/Delete/5
+        // POST: Shipper/Delete
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTransaction(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var service = CreateTransactionService();
+            service.DeleteTransaction(id);
+            TempData["SaveResult"] = "Transaction was deleted";
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        //Helper method
+        private TransactionService CreateTransactionService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new TransactionService(userId);
+            return service;
         }
     }
 }

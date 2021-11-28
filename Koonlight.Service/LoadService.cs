@@ -21,11 +21,16 @@ namespace Koonlight.Service
             var entity =
                 new Load()
                 {
+                    DriverID = model.DriverID,
                     SCAC = model.SCAC,
                     PayOut = model.PayOut,
+                    Broker = model.Broker,
                     PickUpLocation = model.PickUpLocation,
                     DropOffLocation = model.DropOffLocation,
+                    Commodity = model.Commodity,
+                    Distance = model.Distance,
                     Weight = model.Weight,
+                    RatePerMile = model.RatePerMile,
                     DeliverByDate = model.DeliverByDate
                 };
             {
@@ -44,7 +49,7 @@ namespace Koonlight.Service
                              e =>
                                 new LoadList
                                 {
-                                    LoadId = e.LoadId,
+                                    LoadID = e.LoadID,
                                     PayOut = e.PayOut,
                                     PickUpLocation = e.PickUpLocation,
                                     DropOffLocation = e.DropOffLocation,
@@ -61,11 +66,11 @@ namespace Koonlight.Service
             var entity =
                 ctx
                     .Loads
-                    .Single(e => e.LoadId == id /*&& e.DriverID == _userId.ToString()*/);
+                    .Single(e => e.LoadID == id /*&& e.DriverID == _userId.ToString()*/);
             return
               new LoadDetail
               {
-                  LoadId = entity.LoadId,
+                  LoadID = entity.LoadID,
                   SCAC = entity.SCAC,
                   Broker = entity.Broker,
                   PayOut = entity.PayOut,
@@ -90,8 +95,8 @@ namespace Koonlight.Service
                 var entity =
                     ctx
                         .Loads
-                        .Single(e => e.LoadId == model.LoadId /*&& e.DriverID == _userId.ToString()*/);
-                entity.LoadId = model.LoadId;
+                        .Single(e => e.LoadID == model.LoadID /*&& e.DriverID == _userId.ToString()*/);
+                entity.LoadID = model.LoadID;
                 entity.SCAC = model.SCAC;
                 entity.Broker = model.Broker;
                 entity.PayOut = model.PayOut;
@@ -112,7 +117,7 @@ namespace Koonlight.Service
                 var entity =
                     ctx
                         .Loads
-                        .Single(e => e.LoadId == Id /*&& e.DriverID == _userId.ToString()*/);
+                        .Single(e => e.LoadID == Id /*&& e.DriverID == _userId.ToString()*/);
                 ctx.Loads.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

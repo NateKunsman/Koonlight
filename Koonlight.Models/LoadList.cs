@@ -8,7 +8,7 @@ namespace Koonlight.Models
 {
     public class LoadList
     {
-        public int LoadId { get; set; }
+        public int LoadID { get; set; }
         public decimal PayOut { get; set; }
         public string PickUpLocation { get; set; }
         public string DropOffLocation { get; set; }

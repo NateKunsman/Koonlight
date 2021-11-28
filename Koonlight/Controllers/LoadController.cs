@@ -76,12 +76,13 @@ namespace Koonlight.Controllers
             return View(model);
 
         }
+        //PUT: Edit Load
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, LoadEdit model)
         {
             if (!ModelState.IsValid) return View(model);
-            if(model.LoadId != id)
+            if(model.LoadID != id)
             {
                 ModelState.AddModelError("", "Id Mismatch");
                 return View(model);
@@ -95,7 +96,6 @@ namespace Koonlight.Controllers
             ModelState.AddModelError("", "Your load could not be updated.");
             return View();
         }
-        //PUT: Edit Load
         //Delete Load
         [ActionName("Delete")]
         public ActionResult Delete(int id)

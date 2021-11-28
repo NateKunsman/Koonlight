@@ -13,16 +13,16 @@ namespace Koonlight.Models
         [Key]
         public int TransactionID { get; set; }
         //Foreign key for payout???
-        public int Payout { get; set; }
+        public virtual Shipper Shipper { get; set; }
         [ForeignKey(nameof(Shipper))]
         public int ShipperID { get; set; }
-        public virtual Shipper Shipper { get; set; }
+        public virtual Load Load { get; set; }
         [ForeignKey(nameof(Load))]
         public int LoadID { get; set; }
-        public virtual Load Load { get; set; }
+        public int Payout { get; set; }
+        public virtual ApplicationUser Driver { get; set; }
         [ForeignKey(nameof(Driver))]
         public string DriverID { get; set; }
-        public virtual ApplicationUser Driver { get; set; }
         //POD (stretch goal)
     }
 }

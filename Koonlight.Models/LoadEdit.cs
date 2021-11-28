@@ -9,7 +9,7 @@ namespace Koonlight.Models
 {
     public class LoadEdit
     {
-        public int LoadId { get; set; }
+        public int LoadID { get; set; }
         public string Broker { get; set; }
         [MaxLength(4, ErrorMessage = "There are too many characters in this field")]
         public string SCAC { get; set; }
