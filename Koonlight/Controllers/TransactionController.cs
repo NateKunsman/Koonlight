@@ -44,7 +44,7 @@ namespace Koonlight.Controllers
 
             if (service.CreateTransaction(model))
             {
-                // TODO: Add insert logic here
+                
 
                 return RedirectToAction("Index");
             }

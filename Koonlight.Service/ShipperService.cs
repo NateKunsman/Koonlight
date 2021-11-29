@@ -21,7 +21,6 @@ namespace Koonlight.Service
             var entity =
                 new Shipper()
                 {
-                    ShipperID = model.ShipperID,
                     LoadID = model.LoadID,
                     CompanyName = model.CompanyName,
                     Address = model.Address,

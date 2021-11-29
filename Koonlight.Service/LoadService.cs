@@ -21,6 +21,7 @@ namespace Koonlight.Service
             var entity =
                 new Load()
                 {
+                    LoadID = model.LoadID,
                     DriverID = model.DriverID,
                     SCAC = model.SCAC,
                     PayOut = model.PayOut,
@@ -89,6 +90,31 @@ namespace Koonlight.Service
               };
 
         }
+        public LoadEdit GetLoadByIdForEdit(int id)
+        {
+
+            var entity =
+                ctx
+                    .Loads
+                    .Single(e => e.LoadID == id /*&& e.DriverID == _userId.ToString()*/);
+            return
+              new LoadEdit
+              {
+                  LoadID = entity.LoadID,
+                  SCAC = entity.SCAC,
+                  Broker = entity.Broker,
+                  PayOut = entity.PayOut,
+                  PickUpLocation = entity.PickUpLocation,
+                  DropOffLocation = entity.DropOffLocation,
+                  Distance = entity.Distance,
+                  Weight = entity.Weight,
+                  Commodity = entity.Commodity,
+                  RatePerMile = entity.RatePerMile,
+                  DeliverByDate = entity.DeliverByDate,
+                  LoadCovered = entity.LoadCovered,
+              };
+
+        }
         public bool UpdateLoad(LoadEdit model)
         {
             {
@@ -96,7 +122,6 @@ namespace Koonlight.Service
                     ctx
                         .Loads
                         .Single(e => e.LoadID == model.LoadID /*&& e.DriverID == _userId.ToString()*/);
-                entity.LoadID = model.LoadID;
                 entity.SCAC = model.SCAC;
                 entity.Broker = model.Broker;
                 entity.PayOut = model.PayOut;

@@ -1,4 +1,5 @@
 ﻿using Koonlight.Models;
+using Koonlight.MVC.Data;
 using Koonlight.Service;
 using Microsoft.AspNet.Identity;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Koonlight.Controllers
 {
+    [Authorize]
     public class ShipperController : Controller
     {
         // GET: Shipper
@@ -44,8 +46,7 @@ namespace Koonlight.Controllers
 
             if (service.CreateShipper(model))
             {
-                // TODO: Add insert logic here
-
+               
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", "Shipper not created");

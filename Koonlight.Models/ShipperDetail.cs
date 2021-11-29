@@ -9,7 +9,6 @@ namespace Koonlight.Models
 {
     public class ShipperDetail
     {
-        [Key]
         public int ShipperID { get; set; }
         [Required]
         public string CompanyName { get; set; }

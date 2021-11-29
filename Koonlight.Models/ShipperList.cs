@@ -9,7 +9,6 @@ namespace Koonlight.Models
 {
     public class ShipperList
     {
-        [Key]
         public int ShipperID { get; set; }
         public int LoadID { get; set; }
         [Required]

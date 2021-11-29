@@ -60,6 +60,7 @@ namespace Koonlight.Controllers
             var model =
                 new LoadEdit
                 {
+                    LoadID = detail.LoadID,
                     SCAC = detail.SCAC,
                     Broker = detail.Broker,
                     PayOut = detail.PayOut,
@@ -81,13 +82,15 @@ namespace Koonlight.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, LoadEdit model)
         {
+
             if (!ModelState.IsValid) return View(model);
-            if(model.LoadID != id)
+            if (model.LoadID != id)
             {
                 ModelState.AddModelError("", "Id Mismatch");
                 return View(model);
             }
             var service = CreateLoadService();
+            var result = service.GetLoadByIdForEdit(model.LoadID);
             if (service.UpdateLoad(model))
             {
                 TempData["SaveResult"] = "Your load was updated.";

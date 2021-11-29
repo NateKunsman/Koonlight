@@ -11,7 +11,6 @@ namespace Koonlight.Models
 {
     public class LoadCreate
     {
-        [Key]
         public int LoadID { get; set; }
         public string DriverID { get; set; }
         public string Broker { get; set; }
