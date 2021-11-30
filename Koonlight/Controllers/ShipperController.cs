@@ -38,7 +38,7 @@ namespace Koonlight.Controllers
         // POST: Shipper/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateShipper(ShipperCreate model)
+        public ActionResult Create(ShipperCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -62,6 +62,7 @@ namespace Koonlight.Controllers
             var model =
                 new ShipperEdit
                 {
+                    ShipperID = detail.ShipperID,
                     CompanyName = detail.CompanyName,
                     Address = detail.Address,
                 };

@@ -11,13 +11,10 @@ namespace Koonlight.Models
     {
         [Key]
         public int ShipperID { get; set; }
-        public virtual Load Load { get; set; }
-        [ForeignKey(nameof(Load))]
-        public int LoadID { get; set; }
+        public int? LoadID { get; set; }
         [Required]
         public string CompanyName { get; set; }
         [Required]
         public string Address { get; set; }
-
     }
 }

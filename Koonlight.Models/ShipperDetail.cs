@@ -10,6 +10,7 @@ namespace Koonlight.Models
     public class ShipperDetail
     {
         public int ShipperID { get; set; }
+        public int LoadID { get; set; }
         [Required]
         public string CompanyName { get; set; }
         [Required]

@@ -1,9 +1,9 @@
-namespace Koonlight.Data.Migrations
+﻿namespace Koonlight.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class firstMigration : DbMigration
+    public partial class firstmigration : DbMigration
     {
         public override void Up()
         {
@@ -12,6 +12,7 @@ namespace Koonlight.Data.Migrations
                 c => new
                     {
                         LoadID = c.Int(nullable: false, identity: true),
+                        ShipperID = c.Int(nullable: false),
                         DriverID = c.String(maxLength: 128),
                         Broker = c.String(),
                         SCAC = c.String(maxLength: 4),
@@ -32,6 +33,8 @@ namespace Koonlight.Data.Migrations
                     })
                 .PrimaryKey(t => t.LoadID)
                 .ForeignKey("dbo.ApplicationUser", t => t.DriverID)
+                .ForeignKey("dbo.Shipper", t => t.ShipperID, cascadeDelete: false)
+                .Index(t => t.ShipperID)
                 .Index(t => t.DriverID);
             
             CreateTable(
@@ -103,6 +106,17 @@ namespace Koonlight.Data.Migrations
                 .Index(t => t.IdentityRole_Id);
             
             CreateTable(
+                "dbo.Shipper",
+                c => new
+                    {
+                        ShipperID = c.Int(nullable: false, identity: true),
+                        LoadID = c.Int(),
+                        CompanyName = c.String(nullable: false),
+                        Address = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.ShipperID);
+            
+            CreateTable(
                 "dbo.IdentityRole",
                 c => new
                     {
@@ -110,19 +124,6 @@ namespace Koonlight.Data.Migrations
                         Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Shipper",
-                c => new
-                    {
-                        ShipperID = c.Int(nullable: false, identity: true),
-                        LoadID = c.Int(nullable: false),
-                        CompanyName = c.String(nullable: false),
-                        Address = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.ShipperID)
-                .ForeignKey("dbo.Load", t => t.LoadID, cascadeDelete: true)
-                .Index(t => t.LoadID);
             
             CreateTable(
                 "dbo.Transaction",
@@ -137,7 +138,7 @@ namespace Koonlight.Data.Migrations
                 .PrimaryKey(t => t.TransactionID)
                 .ForeignKey("dbo.ApplicationUser", t => t.DriverID)
                 .ForeignKey("dbo.Load", t => t.LoadID, cascadeDelete: false)
-                .ForeignKey("dbo.Shipper", t => t.ShipperID, cascadeDelete: true)
+                .ForeignKey("dbo.Shipper", t => t.ShipperID, cascadeDelete: false)
                 .Index(t => t.ShipperID)
                 .Index(t => t.LoadID)
                 .Index(t => t.DriverID);
@@ -149,8 +150,8 @@ namespace Koonlight.Data.Migrations
             DropForeignKey("dbo.Transaction", "ShipperID", "dbo.Shipper");
             DropForeignKey("dbo.Transaction", "LoadID", "dbo.Load");
             DropForeignKey("dbo.Transaction", "DriverID", "dbo.ApplicationUser");
-            DropForeignKey("dbo.Shipper", "LoadID", "dbo.Load");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
+            DropForeignKey("dbo.Load", "ShipperID", "dbo.Shipper");
             DropForeignKey("dbo.Load", "DriverID", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
@@ -158,15 +159,15 @@ namespace Koonlight.Data.Migrations
             DropIndex("dbo.Transaction", new[] { "DriverID" });
             DropIndex("dbo.Transaction", new[] { "LoadID" });
             DropIndex("dbo.Transaction", new[] { "ShipperID" });
-            DropIndex("dbo.Shipper", new[] { "LoadID" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.Load", new[] { "DriverID" });
+            DropIndex("dbo.Load", new[] { "ShipperID" });
             DropTable("dbo.Transaction");
-            DropTable("dbo.Shipper");
             DropTable("dbo.IdentityRole");
+            DropTable("dbo.Shipper");
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");

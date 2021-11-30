@@ -12,6 +12,9 @@ namespace Koonlight.Models
     {
         [Key]
         public int LoadID { get; set; }
+        public virtual Shipper Shipper { get; set; }
+        [ForeignKey(nameof(Shipper))]
+        public int ShipperID { get; set; }
         public virtual ApplicationUser Driver { get; set; }
         [ForeignKey(nameof(Driver))]
         public string DriverID { get; set; }

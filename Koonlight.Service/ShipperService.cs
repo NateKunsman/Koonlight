@@ -21,10 +21,8 @@ namespace Koonlight.Service
             var entity =
                 new Shipper()
                 {
-                    LoadID = model.LoadID,
                     CompanyName = model.CompanyName,
                     Address = model.Address,
-                    
                 };
             {
                 ctx.Shippers.Add(entity);
@@ -42,7 +40,6 @@ namespace Koonlight.Service
                                 new ShipperList
                                 {
                                     ShipperID = e.ShipperID,
-                                    LoadID = e.LoadID,
                                     CompanyName = e.CompanyName,
                                     Address = e.Address,
                                 }
@@ -76,6 +73,7 @@ namespace Koonlight.Service
                         .Single(e => e.ShipperID == model.ShipperID);
                 
                 entity.ShipperID = model.ShipperID;
+                entity.LoadID = model.LoadID;
                 entity.CompanyName = model.CompanyName;
                 entity.Address = model.Address;
 

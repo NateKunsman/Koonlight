@@ -21,8 +21,7 @@ namespace Koonlight.Service
             var entity =
                 new Load()
                 {
-                    LoadID = model.LoadID,
-                    DriverID = model.DriverID,
+                    ShipperID = model.ShipperID,
                     SCAC = model.SCAC,
                     PayOut = model.PayOut,
                     Broker = model.Broker,
