@@ -25,7 +25,7 @@ namespace Koonlight.Service
                     Payout = model.Payout,
                     ShipperID = model.ShipperID,
                     LoadID = model.LoadID,
-                    DriverID = model.DriverID,
+                    DriverID = _userId.ToString(),
                 };
             {
                 ctx.Transactions.Add(entity);

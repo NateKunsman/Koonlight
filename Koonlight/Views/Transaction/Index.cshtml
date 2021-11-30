@@ -8,6 +8,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @User.Identity.Name
 </p>
 <table class="table">
     <tr>
@@ -21,7 +22,7 @@
             @Html.DisplayNameFor(model => model.Payout)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DriverID)
+            @Html.DisplayNameFor(model => model.Driver.UserName)
         </th>
         <th></th>
     </tr>
@@ -38,7 +39,7 @@
             @Html.DisplayFor(modelItem => item.Payout)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DriverID)
+            @Html.DisplayFor(modelItem => item.Driver.UserName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TransactionID }) |
